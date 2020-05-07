@@ -1,25 +1,35 @@
 <template>
   <div class="container">
     <div class="col s12 m7">
+
           <h4 class="header">Upcoming Shows </h4>
-          <div class="card horizontal" v-for="event in events" :key="event">
+          <div class="card horizontal" 
+               v-for="event in events" 
+               :key="event">
            
             <div class="card-stacked">
               <div class="card-content">
 
                  <a :href="event.performance[0].artist.uri">
-                   <h5 class="heading h5">{{ event.performance[0].displayName }}
-                     <span> - {{ event.start.date }}</span>
+                   <h5 class="heading h5 blue-text text-darken-4">
+                     {{ event.performance[0].displayName }}
+                     <span > - {{ event.start.date | moment("dddd, MMMM Do") }}</span>
                      </h5>
                  </a>
-                    <h6 class="">{{ event.venue.displayName }} - 
+                  <a :href="event.venue.uri">
+                      <h6 class="blue-text text-darken-2"> 
+                        {{ event.venue.displayName }} - 
                       <span> {{ event.venue.metroArea.displayName }}</span>
-                    </h6>
+                      </h6>
+                  </a>
         
               </div>
               <div class="card-action">
-                <a class="red-text text-darken-2" :href="event.uri">View Event Page</a>
-              </div>
+                <a class="red-text text-darken-2" 
+                   :href="event.uri">
+                   View Event Page
+                   </a>
+              </div> 
             </div>
           </div>
         </div>
@@ -27,6 +37,7 @@
 </template>
 
 <script>
+
 export default {
   name: 'GRShows',
   data: function() { 
