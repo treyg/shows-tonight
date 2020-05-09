@@ -5,6 +5,7 @@
 </template>
 
 <script>
+
 import GRShows from './components/GRShows.vue'
 
 export default {
@@ -16,5 +17,5 @@ export default {
 </script>
 
 <style>
-  @import "https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+  @import "https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
 </style>
