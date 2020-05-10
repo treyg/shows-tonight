@@ -1,11 +1,17 @@
 <template>
  
 <div class="wrap">
-  <div class="card">
-      <p>Name: {{name}}</p>
-      <p>Start Date: {{startDate}}</p>
-      <p>Venue: {{venue}}</p>
-      <p>Area: {{metroArea}}</p>
+  <div class="card mb-4 mt-4">
+      <div class="card-body">
+          <h5 class="card-title">
+            {{name}}
+            <span> - {{startDate}}</span>
+          </h5>
+        <p class="card-text">
+            {{venue}} - {{metroArea}}
+        </p>
+       <a :href="eventPageLink" class="btn btn-dark" target="_blank">Songkick Event Page</a>
+      </div>
 
   </div>
 </div>
@@ -31,6 +37,9 @@ export default {
           type: String,
       },
       metroArea: {
+          type: String,
+      },
+      eventPageLink: {
           type: String,
       },
 
