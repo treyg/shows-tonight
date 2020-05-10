@@ -46,7 +46,7 @@ export default {
   },
   methods: {
     testMethod: function() {
-        console.log('test')
+        // console.log('test')
      }
   },
 
