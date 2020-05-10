@@ -1,28 +1,24 @@
 <template>
  
 <div class="container">
-  <div class="card mb-4 mt-4" v-for="event in events" :key="event.id">
-    <div class="card-body" >
-      <a :href="event.performance[0].artist.uri">
-        <h5 class="card-title">
-          {{ event.performance[0].displayName }}
-          <span>- {{ event.start.date | moment("dddd, MMMM Do") }}</span>
-        </h5>
-      </a>
-      <p class="card-text">
-        {{ event.venue.displayName }} -
-        {{ event.venue.metroArea.displayName }}
-      </p>
-      <a :href="event.uri" class="btn btn-dark">Songkick Event Page</a>
-    </div>
-  </div>
+  
+  <ShowCard v-for="event in events" :key="event.id"
+    name={event.performance[0].displayName}
+    startDate="thursday" 
+    venue="intersection"
+    metroArea="detroit" />
   </div>
   
 </template>
 
 <script>
+import ShowCard from './ShowCard'
+
 export default {
   name: "GRShows",
+   components: {
+    ShowCard
+  },
   data: function() {
     return {
       // test songkick api key
