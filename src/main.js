@@ -4,6 +4,7 @@ import App from './App.vue'
 Vue.config.productionTip = false
 
 import VueMoment from 'vue-moment';
+
 Vue.use(VueMoment);
 
 new Vue({

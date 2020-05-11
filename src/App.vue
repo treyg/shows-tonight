@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <Search />
     <GRShows />
   </div>
 </template>
@@ -7,15 +8,17 @@
 <script>
 
 import GRShows from './components/GRShows.vue'
+import Search from './components/Search.vue'
 
 export default {
   name: 'App',
   components: {
-    GRShows
+    GRShows,
+    Search
   }
 }
 </script>
 
 <style>
-  @import "https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
+
 </style>
