@@ -10,11 +10,12 @@
 import GRShows from './components/GRShows.vue'
 import Search from './components/Search.vue'
 
+
 export default {
   name: 'App',
   components: {
     GRShows,
-    Search
+    Search,
   }
 }
 </script>

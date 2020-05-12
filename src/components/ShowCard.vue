@@ -5,12 +5,12 @@
       <div class="card-body">
           <h5 class="card-title">
             {{name}}
-            <span> - {{startDate}}</span>
+            <span> - {{startDate | moment("dddd, MMMM Do")}}</span>
           </h5>
         <p class="card-text">
             {{venue}} - {{metroArea}}
         </p>
-       <a :href="eventPageLink" class="btn btn-dark" target="_blank">Songkick Event Page</a>
+       <a :href="eventPageLink" class="btn btn-sm btn-dark" target="_blank">Songkick Event Page</a>
       </div>
 
   </div>

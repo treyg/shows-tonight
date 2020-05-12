@@ -6,7 +6,7 @@
     v-bind:name="event.performance[0].displayName"
     v-bind:startDate="event.start.date" 
     v-bind:venue="event.venue.displayName"
-    metroArea="Grand Rapids" 
+    v-bind:metroArea="event.venue.metroArea.displayName" 
     v-bind:eventPageLink="event.uri" />
   </div>
   
