@@ -29,7 +29,7 @@
       </div>
     </form>
 
-<!-- Card to display searched items -->
+<!-- Card to display searched items --> <!--
 <div class="wrap" v-for="artist in searchedArtists" :key="artist.id">
   <div class="card mb-4 mt-4">
       <div class="card-body">
@@ -48,23 +48,26 @@
       </div>
 
   </div>
+</div> -->
+  
+<div class="wrap">
+  <ShowCard v-for="artist in searchedArtists" :key="artist.id"
+    v-bind:name="artist.displayName"
+    buttonColor="blue"
+    textColor="#fff" />
+  </div>
 </div>
 
-<hr>
-
-  </div>
 </template>
 
 <script>
-
-//import ShowCard from './ShowCard'
+import ShowCard from './ShowCard'
 
 export default {
   name: "Search",
-  //  components: {
-  //   ShowCard
-  // },
-
+    components: {
+     ShowCard
+   },
   data: function() {
     return {
       // test songkick api key

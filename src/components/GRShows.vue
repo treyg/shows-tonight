@@ -7,7 +7,9 @@
     v-bind:startDate="event.start.date" 
     v-bind:venue="event.venue.displayName"
     v-bind:metroArea="event.venue.metroArea.displayName" 
-    v-bind:eventPageLink="event.uri" />
+    v-bind:eventPageLink="event.uri" 
+    buttonColor="#ccc"
+    textColor="#222" />
   </div>
   
 </template>
@@ -19,7 +21,7 @@ export default {
 
   
   name: "GRShows",
-   components: {
+  components: {
     ShowCard
   },
   data: function() {

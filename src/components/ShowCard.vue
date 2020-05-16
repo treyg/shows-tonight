@@ -10,7 +10,7 @@
         <p class="card-text">
             {{venue}} - {{metroArea}}
         </p>
-       <a :href="eventPageLink" class="btn btn-sm btn-dark" target="_blank">Songkick Event Page</a>
+       <a :href="eventPageLink" v-bind:style="{ backgroundColor: buttonColor, color: textColor }" class="btn btn-sm btn-dark" target="_blank">Songkick Event Page</a>
       </div>
 
   </div>
@@ -40,6 +40,12 @@ export default {
           type: String,
       },
       eventPageLink: {
+          type: String,
+      },
+      buttonColor: {
+          type: String,
+      },
+      textColor: {
           type: String,
       },
 
