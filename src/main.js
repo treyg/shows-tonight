@@ -7,6 +7,7 @@ import VueMoment from 'vue-moment';
 
 Vue.use(VueMoment);
 
+
 new Vue({
   render: h => h(App),
 }).$mount('#app')

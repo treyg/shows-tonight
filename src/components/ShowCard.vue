@@ -8,9 +8,9 @@
             <span> - {{startDate | moment("dddd, MMMM Do")}}</span>
           </h5>
         <p class="card-text">
-            {{venue}} - {{metroArea}}
+            {{venue}} - {{location | cutAfterComma}}
         </p>
-       <a :href="eventPageLink" class="btn btn-sm btn-dark" target="_blank">Songkick Event Page</a>
+       <a :href="eventPageLink" class="btn btn-sm btn-dark" target="_blank">{{ buttonText }}</a>
       </div>
 
   </div>
@@ -36,12 +36,15 @@ export default {
       venue: {
           type: String,
       },
-      metroArea: {
+      location: {
           type: String,
       },
       eventPageLink: {
           type: String,
       },
+      buttonText: {
+          type: String
+      }
 
   },
   methods: {
@@ -52,8 +55,15 @@ export default {
 
   created: function() {
     this.testMethod();
+  },
+
+  filters: {
+  cutAfterComma: function(locationString) {
+      return locationString.split(',')[0];
   }
+}
 };
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
