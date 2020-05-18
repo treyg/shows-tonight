@@ -1,7 +1,7 @@
 <template>
  
 <div class="container">
-  
+  <h2>Upcoming Local Shows</h2>
   <ShowCard v-for="event in events" :key="event.id"
     v-bind:name="event.performance[0].displayName"
     v-bind:startDate="event.start.date" 

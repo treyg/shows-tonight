@@ -1,26 +1,23 @@
 <template>
   <div id="app">
     <Search />
+
     <GRShows />
   </div>
 </template>
 
 <script>
-
-import GRShows from './components/GRShows.vue'
-import Search from './components/Search.vue'
-
+import GRShows from "./components/GRShows.vue";
+import Search from "./components/Search.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
     GRShows,
-    Search,
-
+    Search
   }
-}
+};
 </script>
 
 <style>
-
 </style>

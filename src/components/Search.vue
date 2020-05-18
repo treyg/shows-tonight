@@ -30,12 +30,27 @@
       </div>
     </form>
 
+  <h3 class="mt-4 mb-4" v-if="artistResults">Artist results for "{{ query }}"</h3>
     <ArtistSearchResults v-for="(result, index) in artistResults" 
                           :key="index+10"
                           :artistName="result.displayName"
                           :onTourUntil="result.onTourUntil"
                           :artistPageLink="result.uri"
-                          buttonText="SongKick Artist Page"/>
+                          buttonText="Songkick Artist Page"/>
+
+  <h3 class="mt-4 mb-4" v-if="venueResults">Venue results for "{{ query }}"</h3>
+    <VenueSearchResults v-for="(result, index) in venueResults"
+                        :key="index+5"
+                        :venueName="result.displayName"
+                        :venueStreet="result.street"
+                        :venueCity="result.city.displayName"
+                        :venueState="result.metroArea.country.displayName"
+                        :venueZip="result.zip"
+                        :venueCapacity="result.capacity"
+                        :venueSongkickPage="result.uri"
+                        linkOneText="Venue Songkick Page"
+                        :venueWebsite="result.website"
+                        linkTwoText="Venue Website" />
 
 
     <hr />
@@ -47,15 +62,17 @@
 import axios from "axios";
 
 import ArtistSearchResults from "./ArtistSearchResults";
+import VenueSearchResults from "./VenueSearchResults";
+
 
 export default {
   name: "Search",
   components: {
-    ArtistSearchResults
+    ArtistSearchResults,
+    VenueSearchResults
   },
   data: function() {
     return {
-      // test songkick api key
       apiUrl: "https://api.songkick.com/api/3.0/search",
       apiKey: "eMoOYBIe41vUwDWU",
       query: "",
@@ -64,7 +81,8 @@ export default {
         { name: "Artists", value: "/artists.json?" },
         { name: "Venues", value: "/venues.json?" }
       ],
-      artistResults: null
+      artistResults: null,
+      venueResults: null,
     };
   },
 
@@ -81,8 +99,9 @@ export default {
         .then(response => {
           //console.log(response.data.resultsPage.results)
 
-          //Might have to do the same thing for results.venues and set another data option - ie) artist result and venue results
+          this.venueResults = response.data.resultsPage.results.venue;
           this.artistResults = response.data.resultsPage.results.artist;
+
         });
     }
   }
