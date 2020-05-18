@@ -19,6 +19,7 @@
           <label for="eventType"></label>
 
           <select class="form-control" v-model="selected">
+            
             <option
               v-for="option in options"
               :key="option.value"
@@ -29,10 +30,13 @@
       </div>
     </form>
 
-  <div v-for="result in searchResults" :key="result.id">
-    <p>{{ result.displayName }}</p>
-  </div>
-  
+    <ArtistSearchResults v-for="(result, index) in artistResults" 
+                          :key="index+10"
+                          :artistName="result.displayName"
+                          :onTourUntil="result.onTourUntil"
+                          :artistPageLink="result.uri"
+                          buttonText="SongKick Artist Page"/>
+
 
     <hr />
   </div>
@@ -42,25 +46,25 @@
 <script>
 import axios from "axios";
 
-//import ShowCard from './ShowCard'
+import ArtistSearchResults from "./ArtistSearchResults";
 
 export default {
   name: "Search",
-  // components: {
-  //   ShowCard
-  // },
+  components: {
+    ArtistSearchResults
+  },
   data: function() {
     return {
       // test songkick api key
       apiUrl: "https://api.songkick.com/api/3.0/search",
       apiKey: "eMoOYBIe41vUwDWU",
       query: "",
-      selected: "Artists",
+      selected: "/artists.json?",
       options: [
         { name: "Artists", value: "/artists.json?" },
         { name: "Venues", value: "/venues.json?" }
       ],
-      searchResults: null
+      artistResults: null
     };
   },
 
@@ -76,13 +80,12 @@ export default {
         })
         .then(response => {
           //console.log(response.data.resultsPage.results)
-          this.searchResults = response.data.resultsPage.results.artist
 
-           
-          })
+          //Might have to do the same thing for results.venues and set another data option - ie) artist result and venue results
+          this.artistResults = response.data.resultsPage.results.artist;
+        });
     }
   }
-
 
   //   created: function() {
   //     this.searchEvents();
