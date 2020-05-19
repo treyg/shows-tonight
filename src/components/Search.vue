@@ -19,7 +19,6 @@
           <label for="eventType"></label>
 
           <select class="form-control" v-model="selected">
-            
             <option
               v-for="option in options"
               :key="option.value"
@@ -30,28 +29,35 @@
       </div>
     </form>
 
-  <h3 class="mt-4 mb-4" v-if="artistResults">Artist results for "{{ query }}"</h3>
-    <ArtistSearchResults v-for="(result, index) in artistResults" 
-                          :key="index+10"
-                          :artistName="result.displayName"
-                          :onTourUntil="result.onTourUntil"
-                          :artistPageLink="result.uri"
-                          buttonText="Songkick Artist Page"/>
+    <!-- Search Result components - Show depending on type of search -->
+    <!-- Artist Search Results -->
+    <h3 class="mt-4 mb-4" v-if="artistResults">Artist results for "{{ query }}"</h3>
+    <ArtistSearchResults
+      v-for="(result, index) in artistResults"
+      :key="index+10"
+      :artistName="result.displayName"
+      :onTourUntil="result.onTourUntil"
+      
+      :artistPageLink="result.uri"
+      buttonText="Songkick Artist Page"
+    />
 
-  <h3 class="mt-4 mb-4" v-if="venueResults">Venue results for "{{ query }}"</h3>
-    <VenueSearchResults v-for="(result, index) in venueResults"
-                        :key="index+5"
-                        :venueName="result.displayName"
-                        :venueStreet="result.street"
-                        :venueCity="result.city.displayName"
-                        :venueState="result.metroArea.country.displayName"
-                        :venueZip="result.zip"
-                        :venueCapacity="result.capacity"
-                        :venueSongkickPage="result.uri"
-                        linkOneText="Venue Songkick Page"
-                        :venueWebsite="result.website"
-                        linkTwoText="Venue Website" />
-
+    <!-- Venue Seasrch results -->
+    <h3 class="mt-4 mb-4" v-if="venueResults">Venue results for "{{ query }}"</h3>
+    <VenueSearchResults
+      v-for="(result, index) in venueResults"
+      :key="index+5"
+      :venueName="result.displayName"
+      :venueStreet="result.street"
+      :venueCity="result.city.displayName"
+      :venueState="result.metroArea.country.displayName"
+      :venueZip="result.zip"
+      :venueCapacity="result.capacity"
+      :venueSongkickPage="result.uri"
+      linkOneText="Venue Songkick Page"
+      :venueWebsite="result.website"
+      linkTwoText="Venue Website"
+    />
 
     <hr />
   </div>
@@ -63,7 +69,6 @@ import axios from "axios";
 
 import ArtistSearchResults from "./ArtistSearchResults";
 import VenueSearchResults from "./VenueSearchResults";
-
 
 export default {
   name: "Search",
@@ -82,7 +87,7 @@ export default {
         { name: "Venues", value: "/venues.json?" }
       ],
       artistResults: null,
-      venueResults: null,
+      venueResults: null
     };
   },
 
@@ -101,7 +106,6 @@ export default {
 
           this.venueResults = response.data.resultsPage.results.venue;
           this.artistResults = response.data.resultsPage.results.artist;
-
         });
     }
   }

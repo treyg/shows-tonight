@@ -9,7 +9,8 @@
                  - On tour through {{onTourUntil | moment("MM/D/YY") }}
                  </span>
         </h5>
-        <!-- <a class="btn btn-sm btn-dark" :href="setlist"  target="_blank">Setlist</a> -->
+          <!-- setlist not working - Check search.vue -->
+        <!-- <a v-if="artistSetlist" class="btn btn-sm btn-dark" :href="artistSetlist"  target="_blank">Setlist</a> -->
         <a :href="artistPageLink" class="btn btn-sm btn-dark" target="_blank">{{ buttonText }}</a>
       </div>
     </div>
@@ -31,7 +32,7 @@ export default {
       onTourUntil: {
           type: String,
       },
-      setlist: {
+      artistSetlist: {
           type: String,
       },
       artistPageLink: {
