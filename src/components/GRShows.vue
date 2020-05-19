@@ -1,27 +1,31 @@
 <template>
- 
-<div class="container">
-  <h2>Upcoming Local Shows</h2>
-  <ShowCard v-for="event in events" :key="event.id"
-    v-bind:name="event.performance[0].displayName"
-    v-bind:startDate="event.start.date" 
-    v-bind:venue="event.venue.displayName"
-    v-bind:location="event.location.city" 
-    v-bind:eventPageLink="event.uri"
-    buttonText="Songkick Artist Page" 
+  <div class="container text-center">
+    <h2>Upcoming Local Shows</h2>
+
+    <ShowCard
+      v-for="event in events"
+      :key="event.id"
+      v-bind:name="event.performance[0].displayName"
+      v-bind:startDate="event.start.date"
+      v-bind:venue="event.venue.displayName"
+      v-bind:location="event.location.city"
+      v-bind:eventPageLink="event.uri"
+      buttonText="Songkick Artist Page"
     />
+
+    <button
+      type="button"
+      class="btn btn-secondary mt-4 mb-4"
+    >Show More</button>
   </div>
-  
 </template>
 
 <script>
-import ShowCard from './ShowCard'
+import ShowCard from "./ShowCard";
 
 export default {
-
-  
   name: "GRShows",
-   components: {
+  components: {
     ShowCard
   },
   data: function() {
@@ -31,12 +35,14 @@ export default {
       apiKey: "eMoOYBIe41vUwDWU",
       location: "5035",
       events: null,
+      perPage: 5,
+      
     };
   },
 
   methods: {
     fetchEvents: function() {
-      const url = `${this.apiUrl}/metro_areas/${this.location}/calendar.json?apikey=${this.apiKey}`;
+      const url = `${this.apiUrl}/metro_areas/${this.location}/calendar.json?apikey=${this.apiKey}&per_page=${this.perPage}`;
 
       fetch(url)
         .then(response => response.json())
@@ -44,7 +50,8 @@ export default {
           //console.log(data.resultsPage.results.event)
           this.events = data.resultsPage.results.event;
         });
-    }
+    },
+
   },
 
   created: function() {
