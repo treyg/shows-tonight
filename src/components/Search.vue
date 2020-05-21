@@ -1,23 +1,23 @@
 <template>
   <div class="container">
-    <form>
-      <div class="form-row mt-4">
-        <div class="col-md-10">
-          <label for="searchTerm"></label>
+  
+<!-- Input for search -->
+    <b-form class="mt-4">
+      <div class="form-row">
+        <div class="form-group col-md-7">
+          <label class="sr-only" for="query">Search Term</label>
           <input
             type="text"
             class="form-control"
+            id="query"
             placeholder="Search events, locations, or artists"
             name="query"
             v-model="query"
             @keydown.enter.prevent="axiosSearch"
           />
         </div>
-
-        <!-- dropdown selector for search -->
-        <div class="col">
-          <label for="eventType"></label>
-
+  <!-- dropdown selector for search -->
+        <div class="form-group col-md-3">
           <select class="form-control" v-model="selected">
             <option
               v-for="option in options"
@@ -26,8 +26,12 @@
             >{{ option.name }}</option>
           </select>
         </div>
+  <!-- Button for search -->
+        <div class="form-group col-md-2">
+          <button type="submit" @click.prevent="axiosSearch" class="btn btn-primary float-right float-md-left">Search</button>
+        </div>
       </div>
-    </form>
+    </b-form>
 
     <!-- Search Result components - Show depending on type of search -->
     <!-- Artist Search Results -->
@@ -37,7 +41,6 @@
       :key="index+10"
       :artistName="result.displayName"
       :onTourUntil="result.onTourUntil"
-      
       :artistPageLink="result.uri"
       buttonText="Songkick Artist Page"
     />
@@ -110,9 +113,7 @@ export default {
     }
   }
 
-  //   created: function() {
-  //     this.searchEvents();
-  //  }
+
 };
 </script>
 

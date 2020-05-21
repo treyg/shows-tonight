@@ -2,11 +2,7 @@
   <div class="container text-center">
     <h2>Upcoming Local Shows</h2>
 
-    <!-- Show spinner if page is events are being fetched -->
-    <div class="text-center">
-      <b-spinner v-if="loadingResults" variant="primary" label="Text Centered"></b-spinner>
-    </div>
-
+  
     <ShowCard
       v-for="event in events"
       :key="event.id"
@@ -17,6 +13,11 @@
       v-bind:eventPageLink="event.uri"
       buttonText="Songkick Artist Page"
     />
+
+  <!-- Show spinner if page is events are being fetched -->
+    <div class="text-center mb-4">
+      <b-spinner v-if="loadingResults" variant="primary" label="Text Centered"></b-spinner>
+    </div>
 
     <b-button v-on:click="changeAmountShown" variant="outline-primary" class="mb-4">
       <b-spinner small v-if="loadingResults"></b-spinner>
