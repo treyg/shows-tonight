@@ -15,8 +15,15 @@ export default {
   components: {
     GRShows,
     Search
+  },
+  data: function () {
+  return {
+    page: 'GRShows'
   }
+}
 };
+
+ // routing from scratch https://vuejs.org/v2/guide/routing.html
 </script>
 
 <style>
