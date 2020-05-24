@@ -57,17 +57,6 @@ export default {
         });
     },
 
-    // fetchPosts: function() {
-    //   this.loadingResults = true;
-    //   const url = `http://domain2a0cda.stackstaging.com/wp-json/wp/v2/posts`;
-    //   fetch(url)
-    //     .then(data => {
-    //       //console.log(data.resultsPage.results.event)
-    //       console.log('data')
-    //       console.log(data)
-    //     });
-    // },
-
 
     changeAmountShown: function() {
       if (this.perPage < 10) {
