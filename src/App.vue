@@ -3,18 +3,21 @@
     <Search />
 
     <GRShows />
+    <FormTest />
   </div>
 </template>
 
 <script>
 import GRShows from "./components/GRShows.vue";
 import Search from "./components/Search.vue";
+import FormTest from "./components/FormTest.vue";
 
 export default {
   name: "App",
   components: {
     GRShows,
-    Search
+    Search,
+    FormTest
   },
   data: function () {
   return {
