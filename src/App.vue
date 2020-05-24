@@ -1,33 +1,32 @@
 <template>
   <div id="app">
-    <Search />
-
-    <GRShows />
-    <FormTest />
+    <div id="nav">
+      <router-link to="/">Home</router-link> |
+      <router-link to="/blog">Blog</router-link>
+    </div>
+    <router-view/>
   </div>
 </template>
 
-<script>
-import GRShows from "./components/GRShows.vue";
-import Search from "./components/Search.vue";
-import FormTest from "./components/FormTest.vue";
-
-export default {
-  name: "App",
-  components: {
-    GRShows,
-    Search,
-    FormTest
-  },
-  data: function () {
-  return {
-    page: 'GRShows'
-  }
-}
-};
-
- // routing from scratch https://vuejs.org/v2/guide/routing.html
-</script>
-
 <style>
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+}
+
+#nav {
+  padding: 30px;
+}
+
+#nav a {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+#nav a.router-link-exact-active {
+  color: #42b983;
+}
 </style>

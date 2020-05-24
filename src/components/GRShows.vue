@@ -1,10 +1,6 @@
 <template>
   <div class="container text-center">
     <h2>Upcoming Local Shows</h2>
-
-
-    <button v-on:click="fetchPosts">button</button>
-
   
     <ShowCard
       v-for="event in events"
@@ -31,7 +27,6 @@
 
 <script>
 import ShowCard from "./ShowCard";
-import axios from 'axios';
 
 export default {
   name: "GRShows",
@@ -48,12 +43,6 @@ export default {
       loadingResults: false
     };
   },
-  mounted () {
-    axios
-      .get('http://domain2a0cda.stackstaging.com/wp-json/wp/v2/posts')
-      .then(response => (this.info = response))
-      .then(response => console.log(response.data))
-  },
 
   methods: {
     fetchEvents: function() {
@@ -68,16 +57,16 @@ export default {
         });
     },
 
-    fetchPosts: function() {
-      this.loadingResults = true;
-      const url = `http://domain2a0cda.stackstaging.com/wp-json/wp/v2/posts`;
-      fetch(url)
-        .then(data => {
-          //console.log(data.resultsPage.results.event)
-          console.log('data')
-          console.log(data)
-        });
-    },
+    // fetchPosts: function() {
+    //   this.loadingResults = true;
+    //   const url = `http://domain2a0cda.stackstaging.com/wp-json/wp/v2/posts`;
+    //   fetch(url)
+    //     .then(data => {
+    //       //console.log(data.resultsPage.results.event)
+    //       console.log('data')
+    //       console.log(data)
+    //     });
+    // },
 
 
     changeAmountShown: function() {
