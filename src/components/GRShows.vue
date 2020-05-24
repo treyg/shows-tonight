@@ -1,7 +1,6 @@
 <template>
   <div class="container text-center">
     <h2>Upcoming Local Shows</h2>
-
   
     <ShowCard
       v-for="event in events"
@@ -57,6 +56,7 @@ export default {
           this.loadingResults = false;
         });
     },
+
 
     changeAmountShown: function() {
       if (this.perPage < 10) {
