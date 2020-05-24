@@ -24,7 +24,7 @@
 import axios from 'axios';
 
 export default {
-  name: "GRShows",
+  name: "Blog",
 
    data: function() {
     return {
