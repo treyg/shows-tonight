@@ -13,6 +13,9 @@
               <b-nav-item>
                 <router-link class="text-gray" to="/blog">Blog</router-link>
               </b-nav-item>
+               <b-nav-item>
+                <router-link class="text-gray" to="/submit">Submit</router-link>
+              </b-nav-item>
             </b-navbar-nav>
           </b-collapse>
         </b-navbar>

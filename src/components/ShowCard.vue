@@ -6,7 +6,7 @@
     </h5>
 
     <b-card-text>{{venue}} - {{location | cutAfterComma}}</b-card-text>
-    <b-button :href="eventPageLink" size="sm" variant="primary" target="_blank">{{ buttonText }}</b-button>
+    <b-button  :href="eventPageLink" size="sm" variant="primary" target="_blank">{{ buttonText }}</b-button>
   </b-card>
 </template>
 
