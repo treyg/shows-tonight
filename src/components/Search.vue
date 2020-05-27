@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container mb-4">
   
 <!-- Input for search -->
     <b-form class="mt-4">
@@ -62,7 +62,6 @@
       linkTwoText="Venue Website"
     />
 
-    <hr />
   </div>
 </template>
 

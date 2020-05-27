@@ -60,6 +60,8 @@ gray : #ccc;
 body .bg-dark {
   background-color: #15345a !important;
 }
+
+
 body .bg-dark nav a.router-link-exact-active {
   color: #f9de1b;
 }

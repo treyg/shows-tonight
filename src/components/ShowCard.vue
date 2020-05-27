@@ -1,14 +1,16 @@
 <template>
-  <b-card class="mt-4 mb-4 text-left col-md-8">
-    <h5>
-      {{ name }}
-      <span>- {{startDate | moment("dddd, MMMM Do")}}</span>
-    </h5>
+  <b-card-group deck>
+    <b-card class="mt-4 mb-4 text-left col-md-8">
+      <h5>
+        {{ name }}
+        <span>- {{startDate | moment("dddd, MMMM Do")}}</span>
+      </h5>
 
-    <b-card-text>{{venue}} - {{location | cutAfterComma}}</b-card-text>
-    <h6 class="text-danger" v-if="status">{{status}}</h6>
-    <b-button :href="eventPageLink" size="sm" variant="primary" target="_blank">{{ buttonText }}</b-button>
-  </b-card>
+      <b-card-text>{{venue}} - {{location | cutAfterComma}}</b-card-text>
+      <h6 class="text-danger" v-if="status">{{status}}</h6>
+      <b-button :href="eventPageLink" size="sm" variant="primary" target="_blank">{{ buttonText }}</b-button>
+    </b-card>
+  </b-card-group>
 </template>
 
 <script>
@@ -65,4 +67,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
+.bg-dark {
+  background-color: #15345a !important;
+}
 </style>
