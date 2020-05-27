@@ -1,12 +1,13 @@
 <template>
-  <b-card class="mt-4 mb-4">
+  <b-card class="mt-4 mb-4 text-left col-md-8">
     <h5>
       {{ name }}
       <span>- {{startDate | moment("dddd, MMMM Do")}}</span>
     </h5>
 
     <b-card-text>{{venue}} - {{location | cutAfterComma}}</b-card-text>
-    <b-button  :href="eventPageLink" size="sm" variant="primary" target="_blank">{{ buttonText }}</b-button>
+    <h6 class="text-danger" v-if="status">{{status}}</h6>
+    <b-button :href="eventPageLink" size="sm" variant="primary" target="_blank">{{ buttonText }}</b-button>
   </b-card>
 </template>
 
@@ -25,10 +26,16 @@ export default {
     startDate: {
       type: String
     },
+    opener: {
+      type: String
+    },
     venue: {
       type: String
     },
     location: {
+      type: String
+    },
+    status: {
       type: String
     },
     eventPageLink: {
@@ -58,5 +65,4 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
 </style>
