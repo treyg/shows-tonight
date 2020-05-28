@@ -75,7 +75,7 @@
         <label for="textarea">Event Description</label>
         <b-form-textarea
           id="textarea"
-          v-model="form.text"
+          v-model="form.description"
           placeholder="Enter event description here..."
           rows="6"
           max-rows="6"
@@ -155,7 +155,7 @@ export default {
         name: "",
         eventType: null,
         checked: [],
-        text: null,
+        description: null,
         tags: [],
 
         eventDate: null,

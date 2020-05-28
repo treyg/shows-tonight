@@ -71,4 +71,6 @@ export default {
 .bg-dark {
   background-color: #15345a !important;
 }
+
+
 </style>
