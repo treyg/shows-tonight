@@ -7,6 +7,7 @@
       :key="event.id"
       v-bind:name="event.performance[0].displayName"
       v-bind:startDate="event.start.date"
+      v-bind:startTime="event.start.datetime"
       v-bind:venue="event.venue.displayName"
       v-bind:location="event.location.city"
       v-bind:status="event.status === 'cancelled' ? 'Event has been cancelled' : ''"
