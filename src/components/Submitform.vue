@@ -40,8 +40,8 @@
           <b-form-datepicker
             id="event-date"
             v-model="form.eventDate"
-            :min="min"
-            :max="max"
+            :min="form.min"
+            :max="form.max"
             locale="en"
             required
           ></b-form-datepicker>
@@ -80,7 +80,6 @@
           rows="6"
           max-rows="6"
           required
-          
         ></b-form-textarea>
       </b-form-group>
 
@@ -89,15 +88,14 @@
       <b-form-file
         id="fileUpload"
         class="mb-4"
-        v-model="file"
+        v-model="form.file"
         placeholder="Choose a file or drop it here..."
         drop-placeholder="Drop file here..."
       ></b-form-file>
-      
 
       <!-- Event Tags -->
       <b-form-group>
-          <label for="tags-remove-on-delete">Event Tags</label>
+        <label for="tags-remove-on-delete">Event Tags</label>
         <b-form-tags
           label="Event Tags"
           input-id="tags-remove-on-delete"
@@ -131,10 +129,14 @@
     <b-card class="mt-3" header="Form Data Result">
       <pre class="m-0">{{ form }}</pre>
     </b-card>
+
+    <b-button @click="pushEvent">Click me for put request</b-button>
   </div>
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "Submitform",
   data() {
@@ -165,8 +167,7 @@ export default {
         min: minDate,
         max: maxDate,
 
-        file: null,
-      
+        file: null
       },
       eventTypes: [
         { text: "Event Type", value: null },
@@ -197,6 +198,52 @@ export default {
       this.$nextTick(() => {
         this.show = true;
       });
+    },
+
+    pushEvent: function() {
+// var myHeaders = new Headers();
+// myHeaders.append("Authorization", "Basic YWRtaW46UzEocmFAUSU2TlY0UVFEIQ==");
+// myHeaders.append("Content-Type", "application/json");
+
+// var raw = JSON.stringify({"title":"Sample post title using Postman from vue","content":"This would be the content"});
+
+// var requestOptions = {
+//   method: 'POST',
+//   headers: myHeaders,
+//   body: raw,
+//   redirect: 'follow'
+// };
+
+// fetch("http://domain2a0cda.stackstaging.com/wp-json/wp/v2/posts", requestOptions)
+//   .then(response => response.text())
+//   .then(result => console.log(result))
+//   .catch(error => console.log('error', error));
+
+    
+axios.post('http://domain2a0cda.stackstaging.com/wp-json/wp/v2/posts', {
+   auth: {
+     username: 'admin',
+     password: 'S1(ra@Q%6NV4QQD!'
+   },
+   data: {
+     title: 'Fred',
+     content: 'Flintstone'
+  },
+  headers: {
+    'Content-Type': 'application/json',
+  },
+
+
+  
+  })
+  .then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+
+
     }
   }
 };

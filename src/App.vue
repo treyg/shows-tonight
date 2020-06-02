@@ -21,8 +21,9 @@
         </b-navbar>
       </div>
     </header>
-
+    <transition name="fade" mode="out-in">
     <router-view/>
+    </transition>
 
   </div>
 </template>
@@ -77,5 +78,19 @@ body .bg-dark nav a.router-link-exact-active {
 }
 .text-gray {
   color: #efefef;
+}
+
+
+
+
+
+/* transition animations */
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+  transform: translateX(2em);
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: all .2s ease;
 }
 </style>
