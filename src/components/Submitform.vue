@@ -135,7 +135,9 @@
 </template>
 
 <script>
-import axios from "axios";
+//import axios from "axios";
+import WPAPI from 'wpapi'
+
 
 export default {
   name: "Submitform",
@@ -201,47 +203,49 @@ export default {
     },
 
     pushEvent: function() {
-// var myHeaders = new Headers();
-// myHeaders.append("Authorization", "Basic YWRtaW46UzEocmFAUSU2TlY0UVFEIQ==");
-// myHeaders.append("Content-Type", "application/json");
 
-// var raw = JSON.stringify({"title":"Sample post title using Postman from vue","content":"This would be the content"});
+var wp = new WPAPI({
+    endpoint: 'http://domain2a0cda.stackstaging.com/wp-json/',
+    // This assumes you are using basic auth, as described further below
+    username: 'admin',
+    password: '8lmF tMkA YkVk iX3j gWnA T8xt'
+});
+wp.posts().create({
+    // "title" and "content" are the only required properties
+    title: 'Your Post Title',
+    content: 'Your post content',
+    // Post will be created as a draft by default if a specific "status"
+    // is not specified
+    //status: 'publish'
+}).then(function( response ) {
+    // "response" will hold all properties of your newly-created post,
+    // including the unique `id` the post was assigned on creation
+    console.log( response.id );
+})
 
-// var requestOptions = {
-//   method: 'POST',
-//   headers: myHeaders,
-//   body: raw,
-//   redirect: 'follow'
-// };
 
-// fetch("http://domain2a0cda.stackstaging.com/wp-json/wp/v2/posts", requestOptions)
-//   .then(response => response.text())
-//   .then(result => console.log(result))
-//   .catch(error => console.log('error', error));
 
     
-axios.post('http://domain2a0cda.stackstaging.com/wp-json/wp/v2/posts', {
-   auth: {
-     username: 'admin',
-     password: 'S1(ra@Q%6NV4QQD!'
-   },
-   data: {
-     title: 'Fred',
-     content: 'Flintstone'
-  },
-  headers: {
-    'Content-Type': 'application/json',
-  },
+// axios.post('http://domain2a0cda.stackstaging.com/wp-json/wp/v2/posts', {
+//    auth: {
+//      username: 'admin',
+//      password: 'S1(ra@Q%6NV4QQD!'
+//    },
+//    data: {
+//      title: 'Fred',
+//      content: 'Flintstone'
+//   },
+//   headers: {
+//     'Content-Type': 'application/json',
+//   },
+//   })
+//   .then(function (response) {
+//     console.log(response);
+//   })
+//   .catch(function (error) {
+//     console.log(error);
+//   });
 
-
-  
-  })
-  .then(function (response) {
-    console.log(response);
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
 
 
     }
