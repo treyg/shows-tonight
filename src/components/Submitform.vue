@@ -28,6 +28,15 @@
         </b-form-group>
       </div>
 
+      <b-form-group
+        id="input-title"
+        label="Event Name"
+        label-for="input-title"
+        description="Headline of the event"
+      >
+        <b-form-input id="input-name" v-model="form.eventName" required placeholder="Event Name"></b-form-input>
+      </b-form-group>
+
       <!-- Event Type -->
       <b-form-group id="input-group-3" label="Event Type:" label-for="input-4">
         <b-form-select id="input-3" v-model="form.eventType" :options="eventTypes" required></b-form-select>
@@ -136,8 +145,7 @@
 
 <script>
 //import axios from "axios";
-import WPAPI from 'wpapi'
-
+import WPAPI from "wpapi";
 
 export default {
   name: "Submitform",
@@ -156,8 +164,11 @@ export default {
     return {
       form: {
         email: "",
-        name: "",
+        firstname: "",
+        lastname: "",
+        eventName: "",
         eventType: null,
+        file: null,
         checked: [],
         description: null,
         tags: [],
@@ -168,8 +179,6 @@ export default {
 
         min: minDate,
         max: maxDate,
-
-        file: null
       },
       eventTypes: [
         { text: "Event Type", value: null },
@@ -203,51 +212,65 @@ export default {
     },
 
     pushEvent: function() {
+      var wp = new WPAPI({
+        endpoint: "http://domain2a0cda.stackstaging.com/wp-json/",
+        // This assumes you are using basic auth, as described further below
+        username: "admin",
+        password: "8lmF tMkA YkVk iX3j gWnA T8xt"
+      });
+      wp.posts()
+        .create({
+          // "title" and "content" are the only required properties
+          title: this.form.eventName,
+          content: this.form.description,
 
-var wp = new WPAPI({
-    endpoint: 'http://domain2a0cda.stackstaging.com/wp-json/',
-    // This assumes you are using basic auth, as described further below
-    username: 'admin',
-    password: '8lmF tMkA YkVk iX3j gWnA T8xt'
-});
-wp.posts().create({
-    // "title" and "content" are the only required properties
-    title: 'Your Post Title',
-    content: 'Your post content',
-    // Post will be created as a draft by default if a specific "status"
-    // is not specified
-    //status: 'publish'
-}).then(function( response ) {
-    // "response" will hold all properties of your newly-created post,
-    // including the unique `id` the post was assigned on creation
-    console.log( response.id );
-})
-
-
-
-    
-// axios.post('http://domain2a0cda.stackstaging.com/wp-json/wp/v2/posts', {
-//    auth: {
-//      username: 'admin',
-//      password: 'S1(ra@Q%6NV4QQD!'
-//    },
-//    data: {
-//      title: 'Fred',
-//      content: 'Flintstone'
-//   },
-//   headers: {
-//     'Content-Type': 'application/json',
-//   },
-//   })
-//   .then(function (response) {
-//     console.log(response);
-//   })
-//   .catch(function (error) {
-//     console.log(error);
-//   });
+          fields: {
+            event_title: this.form.eventName,
+            user_email: this.form.email,
+            event_date: this.form.eventDate,
+            event_description: this.form.description,
+            user_first_name: this.form.firstname,
+            user_last_name: this.form.lastname,
+            event_type: this.form.eventType,
+            event_start_time: this.form.eventStartTime,
+            event_end_time: this.form.eventEndTime,
+            event_image: this.form.file,
+            event_tags: this.form.tags,
+            event_info: this.form.checked
+          },
+          // Post will be created as a draft by default if a specific "status"
+          // is not specified
+          status: "publish"
+        })
+        .then(function(response) {
+          // "response" will hold all properties of your newly-created post,
+          // including the unique `id` the post was assigned on creation
+          console.log(response.id);
+        });
 
 
 
+
+
+      // axios.post('http://domain2a0cda.stackstaging.com/wp-json/wp/v2/posts', {
+      //    auth: {
+      //      username: 'admin',
+      //      password: 'S1(ra@Q%6NV4QQD!'
+      //    },
+      //    data: {
+      //      title: 'Fred',
+      //      content: 'Flintstone'
+      //   },
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //   },
+      //   })
+      //   .then(function (response) {
+      //     console.log(response);
+      //   })
+      //   .catch(function (error) {
+      //     console.log(error);
+      //   });
     }
   }
 };
