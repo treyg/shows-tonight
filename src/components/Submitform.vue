@@ -134,12 +134,11 @@
       </div>
     </b-form>
 
+    <b-button @click="pushEvent">Click me for put request</b-button>
     <!-- Data to be displayed for dev purposes only -->
     <b-card class="mt-3" header="Form Data Result">
       <pre class="m-0">{{ form }}</pre>
     </b-card>
-
-    <b-button @click="pushEvent">Click me for put request</b-button>
   </div>
 </template>
 
@@ -178,7 +177,7 @@ export default {
         eventEndTime: null,
 
         min: minDate,
-        max: maxDate,
+        max: maxDate
       },
       eventTypes: [
         { text: "Event Type", value: null },
@@ -223,6 +222,7 @@ export default {
           // "title" and "content" are the only required properties
           title: this.form.eventName,
           content: this.form.description,
+          
 
           fields: {
             event_title: this.form.eventName,
@@ -247,10 +247,6 @@ export default {
           // including the unique `id` the post was assigned on creation
           console.log(response.id);
         });
-
-
-
-
 
       // axios.post('http://domain2a0cda.stackstaging.com/wp-json/wp/v2/posts', {
       //    auth: {
