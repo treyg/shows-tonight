@@ -26,7 +26,7 @@
             >{{ option.name }}</option>
           </select>
         </div>
-  <!-- Button for search -->
+        <!-- Button for search -->
         <div class="form-group col-md-2">
           <button type="submit" @click.prevent="axiosSearch" class="btn btn-primary float-right float-md-left">Search</button>
         </div>
