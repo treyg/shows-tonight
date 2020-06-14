@@ -1,8 +1,9 @@
 <template>
-  <div id="app">
+  <div id="app" v-bind:class="{ darkmode: isDarkModeOn }" >
   <header class="bg-dark">
     <div class="container">
-         <b-navbar toggleable="lg" type="dark" class="dark" variant="faded">
+      <div class="d-flex justify-content-between">
+        <b-navbar toggleable="lg" type="dark" class="dark" variant="faded">
           <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
           <b-collapse id="nav-collapse" is-nav>
@@ -19,6 +20,8 @@
             </b-navbar-nav>
           </b-collapse>
         </b-navbar>
+        <DarkModeToggle v-on:toggleBtnClicked="this.switchDarkMode" />
+        </div>
       </div>
     </header>
     <transition name="fade" mode="out-in">
@@ -27,6 +30,30 @@
 
   </div>
 </template>
+
+<script>
+
+import DarkModeToggle from '@/components/DarkModeToggle.vue'
+
+export default {
+  name: 'App',
+   data() {
+    return {
+      isDarkModeOn: false
+    };
+  },
+  components: {
+    DarkModeToggle
+  },
+  methods: {
+    switchDarkMode: function() {
+      console.log('dark mode switch')
+      this.isDarkModeOn = !this.isDarkModeOn
+    }
+  },
+}
+</script>
+
 
 <style>
 
@@ -80,8 +107,21 @@ body .bg-dark nav a.router-link-exact-active {
   color: #efefef;
 }
 
+/* Dark Mode */
+#app.darkmode, 
+#app.darkmode * {
+  background: #2c3e50;
+  color: #fff;
+}
+#app.darkmode h1,
+#app.darkmode h2,
+#app.darkmode h3 {
+  color: #f9de1b;
+}
 
-
+#app.darkmode a {
+    color: #467cbf;
+}
 
 
 /* transition animations */
