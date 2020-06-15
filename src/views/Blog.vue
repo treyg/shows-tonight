@@ -1,35 +1,23 @@
 
 <template>
   <section class="blog mt-4">
-    <h1>A Blog page</h1>
+    <h1>Locally Submited Events</h1>
     <!-- Show spinner if page is events are being fetched -->
     <div class="text-center mb-4">
       <b-spinner v-if="loadingResults" variant="primary" label="Text Centered"></b-spinner>
     </div>
-    <!-- <div class="container" v-if="!loadingResults">
-      <div class="posts text-left">
-        <div 
-          class="post" 
-          v-for="post in posts"
-          :key="post.id">
-            <h3 class="post-title">{{post.title.rendered}}</h3>
-            <p class="post-excerpt" />{{post.excerpt.rendered }}</p>
 
-          </div>
-      </div>
-    </div>-->
-
-    <div v-for="post in posts" :key="post.id" class="container mb-4">
-
-      <b-card img-alt="Image" img-top style="max-width: 20rem;" class="mb-2">
+    <div class="container mb-4" v-for="post in posts" :key="post.id" >
+      <b-card>
         <h3>{{ post.title.rendered }}</h3>
-        <b-card-text>{{post.acf.event_start_time}}</b-card-text>
-        <b-card-text>{{post.excerpt.rendered}}</b-card-text>
-        <b-card-text>{{post.acf.event_tags}}</b-card-text>
-        
-        <b-button href="#" variant="primary">Go somewhere</b-button>
+        <h5>{{post.acf.event_start_time}}</h5>
+        <p>{{ post.excerpt.rendered }}</p>
+        <p>{{ post.acf.event_tags }}</p>
+
+        <b-link href="#" class="btn btn-primary">View event</b-link>
       </b-card>
     </div>
+
   </section>
 </template>
 
