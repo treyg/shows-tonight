@@ -55,7 +55,7 @@ export default {
   },
 
   methods: {
-    fetchEvents: function() {
+    songkickFetch: function() {
       this.loadingResults = true;
       const url = `${this.skUrl}/metro_areas/${this.location}/calendar.json?apikey=${process.env.VUE_APP_SONGKICK_API}&per_page=${this.perPage}`;
       fetch(url)
@@ -65,7 +65,7 @@ export default {
           this.events = data.resultsPage.results.event;
           this.loadingResults = false;
 
-          this.allEventsArray.push(this.events)
+          //this.allEventsArray.push(this.events)
         
            
         });
@@ -73,15 +73,15 @@ export default {
 
     ticketMasterFetch: function() {
 
-      const url = `${this.tmUrl}?apikey=${process.env.VUE_APP_TICKET_MASTER_API}`
+      const url = `${this.tmUrl}?apikey=${process.env.VUE_APP_TICKET_MASTER_API}&city=grand%20rapids&countryCode=US`
     
         fetch(url)
         .then(response => response.json())
         .then(data => {
-        console.log(data);
+          
+        console.log(data._embedded.events);
+        this.allEventsArray.push(data._embedded.events)
         
-
-         // this.masterEventsLists.push(this.events)
         });
     },
 
@@ -97,7 +97,7 @@ export default {
   },
 
   created: function() {
-    this.fetchEvents();
+    this.songkickFetch();
     this.ticketMasterFetch();
 
   }
