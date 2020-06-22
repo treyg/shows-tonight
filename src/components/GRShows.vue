@@ -40,25 +40,48 @@ export default {
   },
   data: function() {
     return {
-      apiUrl: "https://api.songkick.com/api/3.0",
-      apiKey: "eMoOYBIe41vUwDWU",
+      loadingResults: false,
+      //Songkick api data
+      skUrl: "https://api.songkick.com/api/3.0",
       location: "5035",
       events: null,
       perPage: 5,
-      loadingResults: false
+      //Tickemaster API data
+      tmUrl: "https://app.ticketmaster.com/discovery/v2/events.json",
+      //Master list array for events
+      allEventsArray: [],
+
     };
   },
 
   methods: {
     fetchEvents: function() {
       this.loadingResults = true;
-      const url = `${this.apiUrl}/metro_areas/${this.location}/calendar.json?apikey=${this.apiKey}&per_page=${this.perPage}`;
+      const url = `${this.skUrl}/metro_areas/${this.location}/calendar.json?apikey=${process.env.VUE_APP_SONGKICK_API}&per_page=${this.perPage}`;
       fetch(url)
         .then(response => response.json())
         .then(data => {
           //console.log(data.resultsPage.results.event)
           this.events = data.resultsPage.results.event;
           this.loadingResults = false;
+
+          this.allEventsArray.push(this.events)
+        
+           
+        });
+    },
+
+    ticketMasterFetch: function() {
+
+      const url = `${this.tmUrl}?apikey=${process.env.VUE_APP_TICKET_MASTER_API}`
+    
+        fetch(url)
+        .then(response => response.json())
+        .then(data => {
+        console.log(data);
+        
+
+         // this.masterEventsLists.push(this.events)
         });
     },
 
@@ -75,6 +98,8 @@ export default {
 
   created: function() {
     this.fetchEvents();
+    this.ticketMasterFetch();
+
   }
 };
 </script>
