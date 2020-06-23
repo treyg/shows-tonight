@@ -5,7 +5,7 @@
         {{ name }}
         <span>- {{startDate | moment("dddd, MMMM Do")}}</span>
       </h5>
-      <h6 v-if="startTime">{{ startTime | moment("LT") }}</h6>
+      <h6>{{ startTime | moment("LT") }}</h6>
       <b-card-text>{{venue}} - {{location | cutAfterComma}}</b-card-text>
       <h6 class="text-danger" v-if="status">{{status}}</h6>
       <b-button :href="eventPageLink" size="sm" variant="primary" target="_blank">{{ buttonText }}</b-button>

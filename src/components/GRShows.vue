@@ -2,7 +2,7 @@
   <div class="container">
     <h2>Upcoming Local Shows</h2>
 
-    <ShowCard
+    <!-- <ShowCard
       v-for="event in events"
       :key="event.id"
       v-bind:name="event.performance[0].displayName"
@@ -13,6 +13,19 @@
       v-bind:status="event.status === 'cancelled' ? 'Event has been cancelled' : ''"
       v-bind:eventPageLink="event.uri"
       buttonText="Songkick Artist Page"
+    />-->
+
+    <ShowCard
+      v-for="event in allEventsArray"
+      :key="event.id"
+      v-bind:name="event.name"
+      v-bind:startDate="event.dates.start.localDate"
+      v-bind:startTime="event.dates.start.localTime"
+      v-bind:venue="event._embedded.venues[0].name"
+      v-bind:location="event._embedded.venues[0].city.name"
+      v-bind:status="event.pleaseNote"
+      v-bind:eventPageLink="event.url"
+      buttonText="Event page"
     />
 
     <!-- Show spinner if page is events are being fetched -->
@@ -20,13 +33,12 @@
       <b-spinner v-if="loadingResults" variant="primary" label="Text Centered"></b-spinner>
     </div>
 
-    <div class="col-md-8 text-center ">
+    <div class="col-md-8 text-center">
       <b-button v-on:click="changeAmountShown" variant="outline-primary" class="mb-4">
         <b-spinner small v-if="loadingResults"></b-spinner>
         {{perPage >= 40 ? "Show Less" : "Show More"}}
       </b-button>
     </div>
-
   </div>
 </template>
 
@@ -49,8 +61,9 @@ export default {
       //Tickemaster API data
       tmUrl: "https://app.ticketmaster.com/discovery/v2/events.json",
       //Master list array for events
-      allEventsArray: [],
+      allEventsArray: null,
 
+      allEvents: null
     };
   },
 
@@ -66,22 +79,42 @@ export default {
           this.loadingResults = false;
 
           //this.allEventsArray.push(this.events)
-        
-           
         });
     },
 
     ticketMasterFetch: function() {
+      const url = `${this.tmUrl}?apikey=${process.env.VUE_APP_TICKET_MASTER_API}&radius=75&unit=miles&locale=*&sort=date,desc&city=grand%20rapids`;
 
-      const url = `${this.tmUrl}?apikey=${process.env.VUE_APP_TICKET_MASTER_API}&city=grand%20rapids&countryCode=US`
-    
-        fetch(url)
+      fetch(url)
         .then(response => response.json())
         .then(data => {
+          this.allEventsArray = data._embedded.events;
+          console.log(this.allEventsArray);
+        });
+    },
+
+//Test fetching events with promise.all
+    fetchAllEvents: function() {
+      const urls = [
+        `${this.tmUrl}?apikey=${process.env.VUE_APP_TICKET_MASTER_API}&radius=75&unit=miles&locale=*&sort=date,desc&city=grand%20rapids`,
+        `${this.skUrl}/metro_areas/${this.location}/calendar.json?apikey=${process.env.VUE_APP_SONGKICK_API}&per_page=${this.perPage}`
+      ];
+
+      Promise.all(urls.map(url => fetch(url)))
+        .then(resp => Promise.all(resp.map(r => r.json())))
+        .then(result => {
           
-        console.log(data._embedded.events);
-        this.allEventsArray.push(data._embedded.events)
-        
+          console.log(result[1].resultsPage.results.event);
+
+          console.log(result[0]._embedded.events);
+
+          const skResults = result[0]._embedded.events
+          const tmResulst = result[1].resultsPage.results.event
+
+         this.allEvents = [...skResults, ...tmResulst]
+
+         console.log(this.allEvents);
+          
         });
     },
 
@@ -99,12 +132,11 @@ export default {
   created: function() {
     this.songkickFetch();
     this.ticketMasterFetch();
-
+    this.fetchAllEvents();
   }
 };
 </script>
 
 <style  scoped>
-
 </style>
 
