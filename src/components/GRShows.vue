@@ -16,14 +16,14 @@
     />-->
 
     <ShowCard
-      v-for="event in allEventsArray"
+      v-for="event in allEvents"
       :key="event.id"
       v-bind:name="event.name"
-      v-bind:startDate="event.dates.start.localDate"
-      v-bind:startTime="event.dates.start.localTime"
-      v-bind:venue="event._embedded.venues[0].name"
-      v-bind:location="event._embedded.venues[0].city.name"
-      v-bind:status="event.pleaseNote"
+      v-bind:startDate="event.startDate"
+      v-bind:startTime="event.startTime"
+      v-bind:venue="event.venue"
+      v-bind:location="event.location"
+      v-bind:status="event.status"
       v-bind:eventPageLink="event.url"
       buttonText="Event page"
     />
@@ -68,30 +68,30 @@ export default {
   },
 
   methods: {
-    songkickFetch: function() {
-      this.loadingResults = true;
-      const url = `${this.skUrl}/metro_areas/${this.location}/calendar.json?apikey=${process.env.VUE_APP_SONGKICK_API}&per_page=${this.perPage}`;
-      fetch(url)
-        .then(response => response.json())
-        .then(data => {
-          //console.log(data.resultsPage.results.event)
-          this.events = data.resultsPage.results.event;
-          this.loadingResults = false;
+    // songkickFetch: function() {
+    //   this.loadingResults = true;
+    //   const url = `${this.skUrl}/metro_areas/${this.location}/calendar.json?apikey=${process.env.VUE_APP_SONGKICK_API}&per_page=${this.perPage}`;
+    //   fetch(url)
+    //     .then(response => response.json())
+    //     .then(data => {
+    //       //console.log(data.resultsPage.results.event)
+    //       this.events = data.resultsPage.results.event;
+    //       this.loadingResults = false;
 
-          //this.allEventsArray.push(this.events)
-        });
-    },
+    //       //this.allEventsArray.push(this.events)
+    //     });
+    // },
 
-    ticketMasterFetch: function() {
-      const url = `${this.tmUrl}?apikey=${process.env.VUE_APP_TICKET_MASTER_API}&radius=75&unit=miles&locale=*&sort=date,desc&city=grand%20rapids`;
+    // ticketMasterFetch: function() {
+    //   const url = `${this.tmUrl}?apikey=${process.env.VUE_APP_TICKET_MASTER_API}&radius=75&unit=miles&locale=*&sort=date,desc&city=grand%20rapids`;
 
-      fetch(url)
-        .then(response => response.json())
-        .then(data => {
-          this.allEventsArray = data._embedded.events;
-          console.log(this.allEventsArray);
-        });
-    },
+    //   fetch(url)
+    //     .then(response => response.json())
+    //     .then(data => {
+    //       this.allEventsArray = data._embedded.events;
+    //       console.log(this.allEventsArray);
+    //     });
+    // },
 
 //Test fetching events with promise.all
     fetchAllEvents: function() {
@@ -104,14 +104,40 @@ export default {
         .then(resp => Promise.all(resp.map(r => r.json())))
         .then(result => {
           
-          console.log(result[1].resultsPage.results.event);
+          // console.log(result[0]._embedded.events);
+          // console.log(result[1].resultsPage.results.event);
 
-          console.log(result[0]._embedded.events);
+          const tmResults = result[0]._embedded.events
+          const skResults = result[1].resultsPage.results.event
 
-          const skResults = result[0]._embedded.events
-          const tmResulst = result[1].resultsPage.results.event
+          console.log(skResults);
+          console.log(tmResults);
 
-         this.allEvents = [...skResults, ...tmResulst]
+
+       skResults.forEach(function(event) {
+            event.name = event.displayName
+            event.startDate = event.start.date
+            event.startTime = event.start.time
+            event.venue = event.venue.displayName
+            event.location = event.location.city
+            event.url = event.uri
+          })
+
+
+          
+       tmResults.forEach(function(event) {
+            event.startDate = event.dates.start.localDate
+            event.startTime = event.dates.start.localTime
+            event.venue = event._embedded.venues[0].name
+            event.location = event._embedded.venues[0].city.name
+            event.status = event.pleaseNote
+          })
+
+        //console.log(JSON.parse(JSON.stringify(skResults)));
+
+         this.allEvents = [...skResults, ...tmResults]
+
+         this.allEvents.sort((a, b) => a.startDate < b.startDate ? 1 : -1)
 
          console.log(this.allEvents);
           
@@ -130,8 +156,8 @@ export default {
   },
 
   created: function() {
-    this.songkickFetch();
-    this.ticketMasterFetch();
+    // this.songkickFetch();
+    // this.ticketMasterFetch();
     this.fetchAllEvents();
   }
 };
