@@ -156,8 +156,6 @@ export default {
   },
 
   created: function() {
-    // this.songkickFetch();
-    // this.ticketMasterFetch();
     this.fetchAllEvents();
   }
 };
