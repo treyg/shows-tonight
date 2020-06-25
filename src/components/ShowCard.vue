@@ -10,7 +10,7 @@
       <h6 class="text-danger" v-if="status">{{status}}</h6>
 
       <!-- collapsable event notes -->
-      <b-collapse v-if="pleaseNote" :id="id">
+      <b-collapse class="mb-4" v-if="pleaseNote" :id="id">
         <b-card>
           <h6 class="text-danger">{{pleaseNote}}</h6>
         </b-card>
