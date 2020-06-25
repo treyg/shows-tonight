@@ -23,7 +23,9 @@
       v-bind:startTime="event.startTime"
       v-bind:venue="event.venue"
       v-bind:location="event.location"
-      v-bind:status="event.status"
+      v-bind:status="event.status === 'cancelled' ? 'Event has been cancelled' : ''"
+      v-bind:pleaseNote="event.pleaseNote"
+      v-bind:id="event.id"
       v-bind:eventPageLink="event.url"
       buttonText="Event page"
     />
@@ -61,8 +63,6 @@ export default {
       //Tickemaster API data
       tmUrl: "https://app.ticketmaster.com/discovery/v2/events.json",
       //Master list array for events
-      allEventsArray: null,
-
       allEvents: null
     };
   },
@@ -130,14 +130,14 @@ export default {
             event.startTime = event.dates.start.localTime
             event.venue = event._embedded.venues[0].name
             event.location = event._embedded.venues[0].city.name
-            event.status = event.pleaseNote
+    
           })
 
         //console.log(JSON.parse(JSON.stringify(skResults)));
 
          this.allEvents = [...skResults, ...tmResults]
 
-         this.allEvents.sort((a, b) => a.startDate < b.startDate ? 1 : -1)
+         this.allEvents.sort((a, b) => a.startDate > b.startDate ? 1 : -1)
 
          console.log(this.allEvents);
           

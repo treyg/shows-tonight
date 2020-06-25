@@ -8,7 +8,15 @@
       <h6 v-if="startTime">{{ startTime | moment("LT") }}</h6>
       <b-card-text>{{venue}} - {{location }}</b-card-text>
       <h6 class="text-danger" v-if="status">{{status}}</h6>
+
+      <!-- collapsable event notes -->
+        <b-collapse v-if="pleaseNote" :id="id">
+          <b-card><h6 class="text-danger">{{pleaseNote}}</h6></b-card>
+        </b-collapse>
+
+      
       <b-button :href="eventPageLink" size="sm" variant="primary" target="_blank">{{ buttonText }}</b-button>
+      <b-button  size="sm" v-if="pleaseNote" v-b-toggle="id" class="m-1">Toggle Collapse</b-button>
     </b-card>
   </b-card-group>
 </template>
@@ -41,6 +49,12 @@ export default {
       type: String
     },
     status: {
+      type: String
+    },
+     id: {
+      type: [String, Number]
+    },
+     pleaseNote: {
       type: String
     },
     eventPageLink: {
