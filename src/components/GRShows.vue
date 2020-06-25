@@ -147,10 +147,10 @@ export default {
     changeAmountShown: function() {
       if (this.perPage < 10) {
         this.perPage = 50;
-        this.fetchEvents();
+        this.fetchAllEvents();
       } else if (this.perPage > 40) {
         this.perPage = 5;
-        this.fetchEvents();
+        this.fetchAllEvents();
       }
     }
   },

@@ -16,7 +16,7 @@
         </b-card>
       </b-collapse>
 
-      <div class="border ">
+      <div class="d-flex justify-content-between">
         <b-button
           size="sm"
           v-if="pleaseNote"
@@ -24,7 +24,7 @@
           class="m-1 text-decoration-none"
         >Event Notes</b-button>
 
-        <b-button :href="eventPageLink" size="sm" variant="primary" target="_blank">{{ buttonText }}</b-button>
+        <b-button :href="eventPageLink" size="sm" variant="primary" class="m-1" target="_blank">{{ buttonText }}</b-button>
       </div>
     </b-card>
   </b-card-group>
