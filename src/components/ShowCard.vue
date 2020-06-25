@@ -24,7 +24,7 @@
           class="m-1 text-decoration-none"
         >Event Notes</b-button>
 
-        <b-button :href="eventPageLink" size="sm" variant="primary" class="m-1" target="_blank">{{ buttonText }}</b-button>
+        <b-button :href="eventPageLink" size="sm" variant="primary" class="m-1 ml-auto" target="_blank">{{ buttonText }}</b-button>
       </div>
     </b-card>
   </b-card-group>
