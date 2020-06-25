@@ -10,13 +10,22 @@
       <h6 class="text-danger" v-if="status">{{status}}</h6>
 
       <!-- collapsable event notes -->
-        <b-collapse v-if="pleaseNote" :id="id">
-          <b-card><h6 class="text-danger">{{pleaseNote}}</h6></b-card>
-        </b-collapse>
+      <b-collapse v-if="pleaseNote" :id="id">
+        <b-card>
+          <h6 class="text-danger">{{pleaseNote}}</h6>
+        </b-card>
+      </b-collapse>
 
-      
-      <b-button :href="eventPageLink" size="sm" variant="primary" target="_blank">{{ buttonText }}</b-button>
-      <b-button  size="sm" v-if="pleaseNote" v-b-toggle="id" class="m-1">Toggle Collapse</b-button>
+      <div class="border ">
+        <b-button
+          size="sm"
+          v-if="pleaseNote"
+          v-b-toggle="id"
+          class="m-1 text-decoration-none"
+        >Event Notes</b-button>
+
+        <b-button :href="eventPageLink" size="sm" variant="primary" target="_blank">{{ buttonText }}</b-button>
+      </div>
     </b-card>
   </b-card-group>
 </template>
@@ -51,10 +60,10 @@ export default {
     status: {
       type: String
     },
-     id: {
+    id: {
       type: [String, Number]
     },
-     pleaseNote: {
+    pleaseNote: {
       type: String
     },
     eventPageLink: {
@@ -72,7 +81,7 @@ export default {
 
   created: function() {
     this.testMethod();
-  },
+  }
 
   // filters: {
   //   cutAfterComma: function(locationString) {
@@ -84,6 +93,4 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
-
 </style>
