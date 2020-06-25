@@ -6,7 +6,7 @@
         <span>- {{startDate | moment("dddd, MMMM Do")}}</span>
       </h5>
       <h6 v-if="startTime">{{ startTime | moment("LT") }}</h6>
-      <b-card-text>{{venue}} - {{location }}</b-card-text>
+      <b-card-text>{{venue}} - {{location | cutAfterComma }}</b-card-text>
       <h6 class="text-danger" v-if="status">{{status}}</h6>
 
       <!-- collapsable event notes -->
@@ -81,13 +81,13 @@ export default {
 
   created: function() {
     this.testMethod();
-  }
+  },
 
-  // filters: {
-  //   cutAfterComma: function(locationString) {
-  //     return locationString.split(",")[0];
-  //   }
-  // }
+  filters: {
+    cutAfterComma: function(locationString) {
+      return locationString.split(",")[0];
+    }
+  }
 };
 </script>
 
