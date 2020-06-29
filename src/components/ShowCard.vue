@@ -3,9 +3,10 @@
     <b-card class="mt-4 mb-4 text-left col-md-8">
       <h5>
         {{ name }}
-        <span>- {{startDate | moment("dddd, MMMM Do")}}</span>
+        <span>- {{startDate | moment("dddd, MMMM Do") }}</span>
       </h5>
-      <h6 v-if="startTime">{{ startTime | moment("LT") }}</h6>
+       <h6 v-if="specialGuest">Special Guest: {{ specialGuest }}</h6>
+      <h6 v-if="startTime">Start time: {{ startTime | moment("LT") }}</h6>
       <b-card-text>{{venue}} - {{location | cutAfterComma }}</b-card-text>
       <h6 class="text-danger" v-if="status">{{status}}</h6>
 
@@ -40,6 +41,9 @@ export default {
   },
   props: {
     name: {
+      type: String
+    },
+     specialGuest: {
       type: String
     },
     startDate: {

@@ -19,6 +19,7 @@
       v-for="event in allEvents"
       :key="event.id"
       v-bind:name="event.name"
+      v-bind:specialGuest="event.specialGuest"
       v-bind:startDate="event.startDate"
       v-bind:startTime="event.startTime"
       v-bind:venue="event.venue"
@@ -115,9 +116,13 @@ export default {
 
 
        skResults.forEach(function(event) {
-            event.name = event.displayName
+            event.name = event.performance[0].displayName
+           // event.specialGuest = event.performance[1].displayName
+            if (event.performance.length > 1) {
+              event.specialGuest = event.performance[1].displayName
+            }
             event.startDate = event.start.date
-            event.startTime = event.start.time
+            event.startTime = event.start.datetime
             event.venue = event.venue.displayName
             event.location = event.location.city
             event.url = event.uri
@@ -126,8 +131,12 @@ export default {
 
           
        tmResults.forEach(function(event) {
+            event.name = event._embedded.attractions[0].name
+           if(event._embedded.attractions.length > 1) {
+              event.specialGuest = event._embedded.attractions[1].name
+           }
             event.startDate = event.dates.start.localDate
-            event.startTime = event.dates.start.localTime
+            event.startTime = event.dates.start.dateTime
             event.venue = event._embedded.venues[0].name
             event.location = event._embedded.venues[0].city.name
     
@@ -160,5 +169,7 @@ export default {
 </script>
 
 <style  scoped>
+
+
 </style>
 
