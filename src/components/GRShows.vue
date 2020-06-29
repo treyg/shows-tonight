@@ -63,50 +63,25 @@ export default {
       perPage: 5,
       //Tickemaster API data
       tmUrl: "https://app.ticketmaster.com/discovery/v2/events.json",
+      tmPerPage: 10,
       //Master list array for events
       allEvents: null
     };
   },
 
   methods: {
-    // songkickFetch: function() {
-    //   this.loadingResults = true;
-    //   const url = `${this.skUrl}/metro_areas/${this.location}/calendar.json?apikey=${process.env.VUE_APP_SONGKICK_API}&per_page=${this.perPage}`;
-    //   fetch(url)
-    //     .then(response => response.json())
-    //     .then(data => {
-    //       //console.log(data.resultsPage.results.event)
-    //       this.events = data.resultsPage.results.event;
-    //       this.loadingResults = false;
 
-    //       //this.allEventsArray.push(this.events)
-    //     });
-    // },
 
-    // ticketMasterFetch: function() {
-    //   const url = `${this.tmUrl}?apikey=${process.env.VUE_APP_TICKET_MASTER_API}&radius=75&unit=miles&locale=*&sort=date,desc&city=grand%20rapids`;
-
-    //   fetch(url)
-    //     .then(response => response.json())
-    //     .then(data => {
-    //       this.allEventsArray = data._embedded.events;
-    //       console.log(this.allEventsArray);
-    //     });
-    // },
-
-//Test fetching events with promise.all
+//Fetching events with promise.all
     fetchAllEvents: function() {
       const urls = [
-        `${this.tmUrl}?apikey=${process.env.VUE_APP_TICKET_MASTER_API}&radius=75&unit=miles&locale=*&sort=date,desc&city=grand%20rapids`,
+        `${this.tmUrl}?apikey=${process.env.VUE_APP_TICKET_MASTER_API}&radius=75&unit=miles&locale=*&sort=date,desc&city=grand%20rapids&size=${this.tmPerPage}`,
         `${this.skUrl}/metro_areas/${this.location}/calendar.json?apikey=${process.env.VUE_APP_SONGKICK_API}&per_page=${this.perPage}`
       ];
 
       Promise.all(urls.map(url => fetch(url)))
         .then(resp => Promise.all(resp.map(r => r.json())))
         .then(result => {
-          
-          // console.log(result[0]._embedded.events);
-          // console.log(result[1].resultsPage.results.event);
 
           const tmResults = result[0]._embedded.events
           const skResults = result[1].resultsPage.results.event
@@ -117,7 +92,7 @@ export default {
 
        skResults.forEach(function(event) {
             event.name = event.performance[0].displayName
-           // event.specialGuest = event.performance[1].displayName
+     
             if (event.performance.length > 1) {
               event.specialGuest = event.performance[1].displayName
             }
@@ -132,6 +107,7 @@ export default {
           
        tmResults.forEach(function(event) {
             event.name = event._embedded.attractions[0].name
+
            if(event._embedded.attractions.length > 1) {
               event.specialGuest = event._embedded.attractions[1].name
            }
