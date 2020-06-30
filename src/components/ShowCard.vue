@@ -10,23 +10,24 @@
       <b-card-text>{{venue}} - {{location | cutAfterComma }}</b-card-text>
       <h6 class="text-danger" v-if="status">{{status}}</h6>
 
-      <!-- collapsable event notes -->
-      <b-collapse class="mb-4" v-if="pleaseNote" :id="id">
-        <b-card>
-          <h6 class="text-danger">{{pleaseNote}}</h6>
-        </b-card>
-      </b-collapse>
-
+   
       <div class="d-flex justify-content-between">
         <b-button
           size="sm"
           v-if="pleaseNote"
           v-b-toggle="id"
-          class="m-1 text-decoration-none"
+          variant="link"
+          class="m-1 text-decoration-none "
         >Event Notes</b-button>
-
-        <b-button :href="eventPageLink" size="sm" variant="primary" class="m-1 ml-auto" target="_blank">{{ buttonText }}</b-button>
+        <b-button :href="eventPageLink" size="sm" variant="primary" class="m-1 ml-auto" >{{ buttonText }}</b-button>
       </div>
+         <!-- collapsable event notes -->
+      <b-collapse class="mt-4" v-if="pleaseNote" :id="id">
+        <b-card>
+          <h6 class="text-danger">{{pleaseNote}}</h6>
+        </b-card>
+      </b-collapse>
+
     </b-card>
   </b-card-group>
 </template>

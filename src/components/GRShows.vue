@@ -24,7 +24,7 @@
       v-bind:startTime="event.startTime"
       v-bind:venue="event.venue"
       v-bind:location="event.location"
-      v-bind:status="event.status === 'cancelled' ? 'Event has been cancelled' : ''"
+      v-bind:status="event.status === 'cancelled' ? 'Event has been cancelled' : '' || event.status === 'postponed' ? 'Event has been postponed' : ''"
       v-bind:pleaseNote="event.pleaseNote"
       v-bind:id="event.id"
       v-bind:eventPageLink="event.url"
