@@ -2,19 +2,6 @@
   <div class="container">
     <h2>Upcoming Local Shows</h2>
 
-    <!-- <ShowCard
-      v-for="event in events"
-      :key="event.id"
-      v-bind:name="event.performance[0].displayName"
-      v-bind:startDate="event.start.date"
-      v-bind:startTime="event.start.datetime"
-      v-bind:venue="event.venue.displayName"
-      v-bind:location="event.location.city"
-      v-bind:status="event.status === 'cancelled' ? 'Event has been cancelled' : ''"
-      v-bind:eventPageLink="event.uri"
-      buttonText="Songkick Artist Page"
-    />-->
-
     <ShowCard
       v-for="event in allEvents"
       :key="event.id"

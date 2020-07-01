@@ -17,8 +17,8 @@
           v-if="pleaseNote"
           v-b-toggle="id"
           variant="link"
-          class="m-1 text-decoration-none "
-        >Event Notes</b-button>
+          class="text-decoration-none "
+        >Event Notes<b-icon-arrow-down></b-icon-arrow-down></b-button>
         <b-button :href="eventPageLink" size="sm" variant="primary" class="m-1 ml-auto" >{{ buttonText }}</b-button>
       </div>
          <!-- collapsable event notes -->
