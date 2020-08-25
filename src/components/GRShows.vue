@@ -78,8 +78,15 @@ export default {
 
 
        skResults.forEach(function(event) {
-            event.name = event.performance[0].displayName
+
+      //event.name = event.performance[0].displayName
      
+
+      if (event.performance > 0) {
+              event.name = event.performance[0].displayName
+            } else {
+              event.name = event.displayName
+            }
             if (event.performance.length > 1) {
               event.specialGuest = event.performance[1].displayName
             }
