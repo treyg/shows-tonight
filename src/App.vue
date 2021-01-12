@@ -1,64 +1,27 @@
 <template>
-  <div id="app" v-bind:class="{ darkmode: isDarkModeOn }" >
-  <header class="bg-dark">
-    <div class="container">
-      <div class="d-flex justify-content-between">
-        <b-navbar toggleable="lg" type="dark" class="dark" variant="faded">
-          <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
-
-          <b-collapse id="nav-collapse" is-nav>
-            <b-navbar-nav>
-              <b-nav-item>
-                <router-link class="text-gray" to="/">Home</router-link>
-             </b-nav-item>
-              <b-nav-item>
-                <router-link class="text-gray" to="/blog">Blog</router-link>
-              </b-nav-item>
-               <b-nav-item>
-                <router-link class="text-gray" to="/submit">Submit</router-link>
-              </b-nav-item>
-            </b-navbar-nav>
-          </b-collapse>
-        </b-navbar>
-        <DarkModeToggle v-on:toggleBtnClicked="this.switchDarkMode" />
-        </div>
-      </div>
-    </header>
-    <transition name="fade" mode="out-in">
-    <router-view/>
-    </transition>
-
-  </div>
+  <NavBar />
 </template>
 
 <script>
-
-import DarkModeToggle from '@/components/DarkModeToggle.vue'
+import NavBar from "@/components/NavBar";
 
 export default {
-  name: 'App',
-   data() {
+  name: "App",
+  data() {
     return {
-      isDarkModeOn: false
+      something: true,
     };
   },
   components: {
-    DarkModeToggle
+    NavBar,
   },
-  methods: {
-    switchDarkMode: function() {
-      console.log('dark mode switch')
-      this.isDarkModeOn = !this.isDarkModeOn
-    }
-  },
-}
+};
 </script>
 
-
 <style>
+/*
+Colors
 
-/** Colors 
- **
 grfc steelblue: #467cbf   rgb(70,124,191)
 
 grfc midnightblue: #15345a  rgb(21,52,90)
@@ -67,9 +30,7 @@ griffins crimson: #ff2438    rgb(255,36,56)
 
 city of GR yellow: #f9de1b    rgb(249,222,27)
 
-gray : #ccc;
-
-**/
+gray : #ccc; */
 
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -83,12 +44,10 @@ gray : #ccc;
   padding: 30px;
 }
 
-
 /* Global Classes to override bootstrap default */
 body .bg-dark {
   background-color: #15345a !important;
 }
-
 
 body .bg-dark nav a.router-link-exact-active {
   color: #f9de1b;
@@ -108,8 +67,9 @@ body .bg-dark nav a.router-link-exact-active {
 }
 
 /* Dark Mode */
-#app.darkmode, 
+#app.darkmode,
 #app.darkmode * {
+  background-color: #2c3e50;
   background: #2c3e50;
   color: #fff;
 }
@@ -120,17 +80,18 @@ body .bg-dark nav a.router-link-exact-active {
 }
 
 #app.darkmode a {
-    color: #467cbf;
+  color: #467cbf;
 }
 
-
 /* transition animations */
-.fade-enter, .fade-leave-to {
+.fade-enter,
+.fade-leave-to {
   opacity: 0;
   transform: translateX(2em);
 }
 
-.fade-enter-active, .fade-leave-active {
-  transition: all .2s ease;
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 0.2s ease;
 }
 </style>

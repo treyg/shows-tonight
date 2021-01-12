@@ -6,15 +6,15 @@
 </template>
 
 <script>
-// @ is an alias to /src
-import Search from '@/components/Search.vue'
-import GRShows from '@/components/GRShows.vue'
+// @ is an alias to /srcz
+import Search from "@/components/Search.vue";
+import GRShows from "@/components/GRShows.vue";
 
 export default {
-  name: 'Home',
+  name: "Home",
   components: {
     GRShows,
-    Search
-  }
-}
+    Search,
+  },
+};
 </script>
