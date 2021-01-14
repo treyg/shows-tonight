@@ -53,17 +53,13 @@ body .bg-dark nav a.router-link-exact-active {
   color: #f9de1b;
 }
 
-.text-crimson {
-  color: #ff2438;
-}
-.text-yellow {
-  color: #f9de1b;
-}
-.text-steel-blue {
-  color: #467cbf;
-}
-.text-gray {
+body .bg-dark nav a {
   color: #efefef;
+}
+
+body .bg-dark nav a:hover {
+  color: #c5c5c5;
+  text-decoration: none;
 }
 
 /* Dark Mode */

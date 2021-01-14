@@ -1,0 +1,22 @@
+// Colors
+
+// grfc steelblue: #467cbf   rgb(70,124,191)
+
+// grfc midnightblue: #15345a  rgb(21,52,90)
+
+// griffins crimson: #ff2438    rgb(255,36,56)
+
+// city of GR yellow: #f9de1b    rgb(249,222,27)
+
+// gray : #ccc;
+
+$primary: #467cbf;
+$dark: #15345a;
+$danger: #ff2438;
+$crimson: $danger;
+$yellow: #f9de1b;
+$gray: #efefef;
+$text-gray: #efefef;
+
+@import "node_modules/bootstrap/scss/bootstrap.scss";
+@import "node_modules/bootstrap-vue/src/index.scss";

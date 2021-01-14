@@ -3,14 +3,13 @@
     <b-card class="mt-4 mb-4 text-left col-md-8">
       <h5>
         {{ name }}
-        <span>- {{startDate | moment("dddd, MMMM Do") }}</span>
+        <span>- {{ startDate | moment("dddd, MMMM Do") }}</span>
       </h5>
-       <h6 v-if="specialGuest">Special Guest: {{ specialGuest }}</h6>
+      <h6 v-if="specialGuest">Special Guest: {{ specialGuest }}</h6>
       <h6 v-if="startTime">Start time: {{ startTime | moment("LT") }}</h6>
-      <b-card-text>{{venue}} - {{location | cutAfterComma }}</b-card-text>
-      <h6 class="text-danger" v-if="status">{{status}}</h6>
+      <b-card-text>{{ venue }} - {{ location | cutAfterComma }}</b-card-text>
+      <h6 class="text-danger" v-if="status">{{ status }}</h6>
 
-   
       <div class="d-flex justify-content-between">
         <b-button
           size="sm"
@@ -18,16 +17,22 @@
           v-b-toggle="id"
           variant="link"
           class="text-decoration-none "
-        >Event Notes<b-icon-arrow-down></b-icon-arrow-down></b-button>
-        <b-button :href="eventPageLink" size="sm" variant="primary" class="m-1 ml-auto" >{{ buttonText }}</b-button>
+          >Event Notes<b-icon-arrow-down></b-icon-arrow-down
+        ></b-button>
+        <b-button
+          :href="eventPageLink"
+          size="sm"
+          variant="primary"
+          class="m-1 ml-auto"
+          >{{ buttonText }}</b-button
+        >
       </div>
-         <!-- collapsable event notes -->
+      <!-- collapsable event notes -->
       <b-collapse class="mt-4" v-if="pleaseNote" :id="id">
         <b-card>
-          <h6 class="text-danger">{{pleaseNote}}</h6>
+          <h6 class="text-danger">{{ pleaseNote }}</h6>
         </b-card>
       </b-collapse>
-
     </b-card>
   </b-card-group>
 </template>
@@ -37,51 +42,51 @@ export default {
   name: "ShowCard",
   data() {
     return {
-      something: null
+      something: null,
     };
   },
   props: {
     name: {
-      type: String
+      type: String,
     },
-     specialGuest: {
-      type: String
+    specialGuest: {
+      type: String,
     },
     startDate: {
-      type: String
+      type: String,
     },
     opener: {
-      type: String
+      type: String,
     },
     venue: {
-      type: String
+      type: String,
     },
     location: {
-      type: String
+      type: String,
     },
     startTime: {
-      type: String
+      type: String,
     },
     status: {
-      type: String
+      type: String,
     },
     id: {
-      type: [String, Number]
+      type: [String, Number],
     },
     pleaseNote: {
-      type: String
+      type: String,
     },
     eventPageLink: {
-      type: String
+      type: String,
     },
     buttonText: {
-      type: String
-    }
+      type: String,
+    },
   },
   methods: {
     testMethod: function() {
       // console.log('test')
-    }
+    },
   },
 
   created: function() {
@@ -91,11 +96,10 @@ export default {
   filters: {
     cutAfterComma: function(locationString) {
       return locationString.split(",")[0];
-    }
-  }
+    },
+  },
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-</style>
+<style scoped></style>

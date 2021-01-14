@@ -12,7 +12,9 @@
                   <router-link class="text-gray" to="/">Home</router-link>
                 </b-nav-item>
                 <b-nav-item>
-                  <router-link class="text-gray" to="/blog">Blog</router-link>
+                  <router-link class="text-gray" to="/blog"
+                    >Community Shows</router-link
+                  >
                 </b-nav-item>
                 <b-nav-item>
                   <router-link class="text-gray" to="/submit"
